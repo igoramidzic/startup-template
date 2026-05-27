@@ -74,7 +74,7 @@ importers:
         version: 5.2.9
       '@tailwindcss/vite':
         specifier: ^4.3.0
-        version: 4.3.0(vite@8.0.14(@types/node@24.12.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.9.0))
+        version: 4.3.0(vite@8.0.14(@types/node@25.9.1)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.9.0))
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -101,7 +101,7 @@ importers:
         version: 7.15.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       shadcn:
         specifier: ^4.8.2
-        version: 4.8.2(@types/node@24.12.4)(typescript@6.0.3)
+        version: 4.8.2(@types/node@25.9.1)(typescript@6.0.3)
       tailwind-merge:
         specifier: ^3.6.0
         version: 3.6.0
@@ -116,19 +116,19 @@ importers:
         specifier: ^10.0.1
         version: 10.0.1(eslint@10.4.0(jiti@2.7.0))
       '@types/node':
-        specifier: ^24.12.4
-        version: 24.12.4
+        specifier: ^25.9.1
+        version: 25.9.1
       '@types/react':
-        specifier: ^19.2.14
+        specifier: ^19.2.15
         version: 19.2.15
       '@types/react-dom':
         specifier: ^19.2.3
         version: 19.2.3(@types/react@19.2.15)
       '@vitejs/plugin-react':
-        specifier: ^6.0.1
-        version: 6.0.2(vite@8.0.14(@types/node@24.12.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.9.0))
+        specifier: ^6.0.2
+        version: 6.0.2(vite@8.0.14(@types/node@25.9.1)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.9.0))
       eslint:
-        specifier: ^10.3.0
+        specifier: ^10.4.0
         version: 10.4.0(jiti@2.7.0)
       eslint-plugin-react-hooks:
         specifier: ^7.1.1
@@ -140,14 +140,14 @@ importers:
         specifier: ^17.6.0
         version: 17.6.0
       typescript:
-        specifier: ~6.0.2
+        specifier: ~6.0.3
         version: 6.0.3
       typescript-eslint:
-        specifier: ^8.59.2
+        specifier: ^8.60.0
         version: 8.60.0(eslint@10.4.0(jiti@2.7.0))(typescript@6.0.3)
       vite:
-        specifier: ^8.0.12
-        version: 8.0.14(@types/node@24.12.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.9.0)
+        specifier: ^8.0.14
+        version: 8.0.14(@types/node@25.9.1)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.9.0)
 
 packages:
 
@@ -7979,12 +7979,12 @@ snapshots:
     optionalDependencies:
       '@types/node': 25.9.1
 
-  '@inquirer/confirm@6.1.0(@types/node@24.12.4)':
+  '@inquirer/confirm@6.1.0(@types/node@25.9.1)':
     dependencies:
-      '@inquirer/core': 11.2.0(@types/node@24.12.4)
-      '@inquirer/type': 4.0.6(@types/node@24.12.4)
+      '@inquirer/core': 11.2.0(@types/node@25.9.1)
+      '@inquirer/type': 4.0.6(@types/node@25.9.1)
     optionalDependencies:
-      '@types/node': 24.12.4
+      '@types/node': 25.9.1
 
   '@inquirer/core@10.3.2(@types/node@25.9.1)':
     dependencies:
@@ -7999,17 +7999,17 @@ snapshots:
     optionalDependencies:
       '@types/node': 25.9.1
 
-  '@inquirer/core@11.2.0(@types/node@24.12.4)':
+  '@inquirer/core@11.2.0(@types/node@25.9.1)':
     dependencies:
       '@inquirer/ansi': 2.0.6
       '@inquirer/figures': 2.0.6
-      '@inquirer/type': 4.0.6(@types/node@24.12.4)
+      '@inquirer/type': 4.0.6(@types/node@25.9.1)
       cli-width: 4.1.0
       fast-wrap-ansi: 0.2.2
       mute-stream: 4.0.0
       signal-exit: 4.1.0
     optionalDependencies:
-      '@types/node': 24.12.4
+      '@types/node': 25.9.1
 
   '@inquirer/editor@4.2.23(@types/node@25.9.1)':
     dependencies:
@@ -8106,9 +8106,9 @@ snapshots:
     optionalDependencies:
       '@types/node': 25.9.1
 
-  '@inquirer/type@4.0.6(@types/node@24.12.4)':
+  '@inquirer/type@4.0.6(@types/node@25.9.1)':
     optionalDependencies:
-      '@types/node': 24.12.4
+      '@types/node': 25.9.1
 
   '@isaacs/fs-minipass@4.0.1':
     dependencies:
@@ -9966,13 +9966,6 @@ snapshots:
       '@tailwindcss/oxide-win32-arm64-msvc': 4.3.0
       '@tailwindcss/oxide-win32-x64-msvc': 4.3.0
 
-  '@tailwindcss/vite@4.3.0(vite@8.0.14(@types/node@24.12.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.9.0))':
-    dependencies:
-      '@tailwindcss/node': 4.3.0
-      '@tailwindcss/oxide': 4.3.0
-      tailwindcss: 4.3.0
-      vite: 8.0.14(@types/node@24.12.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.9.0)
-
   '@tailwindcss/vite@4.3.0(vite@8.0.14(@types/node@25.9.1)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.9.0))':
     dependencies:
       '@tailwindcss/node': 4.3.0
@@ -10059,11 +10052,11 @@ snapshots:
 
   '@types/sax@1.2.7':
     dependencies:
-      '@types/node': 24.12.4
+      '@types/node': 25.9.1
 
   '@types/set-cookie-parser@2.4.10':
     dependencies:
-      '@types/node': 24.12.4
+      '@types/node': 25.9.1
 
   '@types/statuses@2.0.6': {}
 
@@ -10184,10 +10177,10 @@ snapshots:
 
   '@ungap/structured-clone@1.3.1': {}
 
-  '@vitejs/plugin-react@6.0.2(vite@8.0.14(@types/node@24.12.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.9.0))':
+  '@vitejs/plugin-react@6.0.2(vite@8.0.14(@types/node@25.9.1)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.9.0))':
     dependencies:
       '@rolldown/pluginutils': 1.0.1
-      vite: 8.0.14(@types/node@24.12.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.9.0)
+      vite: 8.0.14(@types/node@25.9.1)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.9.0)
 
   abort-controller@3.0.0:
     dependencies:
@@ -13288,9 +13281,9 @@ snapshots:
 
   ms@2.1.3: {}
 
-  msw@2.14.6(@types/node@24.12.4)(typescript@6.0.3):
+  msw@2.14.6(@types/node@25.9.1)(typescript@6.0.3):
     dependencies:
-      '@inquirer/confirm': 6.1.0(@types/node@24.12.4)
+      '@inquirer/confirm': 6.1.0(@types/node@25.9.1)
       '@mswjs/interceptors': 0.41.9
       '@open-draft/deferred-promise': 3.0.0
       '@types/statuses': 2.0.6
@@ -14526,7 +14519,7 @@ snapshots:
 
   setprototypeof@1.2.0: {}
 
-  shadcn@4.8.2(@types/node@24.12.4)(typescript@6.0.3):
+  shadcn@4.8.2(@types/node@25.9.1)(typescript@6.0.3):
     dependencies:
       '@babel/core': 7.29.7
       '@babel/parser': 7.29.7
@@ -14547,7 +14540,7 @@ snapshots:
       fuzzysort: 3.1.0
       https-proxy-agent: 7.0.6
       kleur: 4.1.5
-      msw: 2.14.6(@types/node@24.12.4)(typescript@6.0.3)
+      msw: 2.14.6(@types/node@25.9.1)(typescript@6.0.3)
       node-fetch: 3.3.2
       open: 11.0.0
       ora: 8.2.0
@@ -15451,20 +15444,6 @@ snapshots:
       fsevents: 2.3.3
       jiti: 2.7.0
       lightningcss: 1.32.0
-      yaml: 2.9.0
-
-  vite@8.0.14(@types/node@24.12.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.9.0):
-    dependencies:
-      lightningcss: 1.32.0
-      picomatch: 4.0.4
-      postcss: 8.5.15
-      rolldown: 1.0.2
-      tinyglobby: 0.2.16
-    optionalDependencies:
-      '@types/node': 24.12.4
-      esbuild: 0.27.7
-      fsevents: 2.3.3
-      jiti: 2.7.0
       yaml: 2.9.0
 
   vite@8.0.14(@types/node@25.9.1)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.9.0):
