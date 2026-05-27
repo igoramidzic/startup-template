@@ -1,0 +1,705 @@
+---
+import {
+  ArrowUp,
+  ChartLine,
+  Maximize2,
+  MessageCircleQuestion,
+  Minus,
+  Paperclip,
+  ScanSearch,
+  X,
+} from '@lucide/astro';
+---
+
+<section class="px-5 py-16 sm:py-20">
+  <div class="mx-auto max-w-[60rem]">
+    <div class="grid grid-cols-1 items-center gap-12 md:grid-cols-5 md:gap-12">
+      <div class="md:col-span-2">
+        <div
+          id="ai-chat-demo"
+          class="ai-chat-card bg-card text-foreground mx-auto flex h-[520px] w-full max-w-[360px] flex-col overflow-hidden rounded-xl border shadow-sm select-text md:mx-0"
+          role="dialog"
+          aria-label="Acme chat demo"
+        >
+          <div class="relative flex h-12 shrink-0 items-center gap-2 px-3">
+            <span class="flex min-w-0 items-center gap-2">
+              <span class="text-foreground truncate text-[13px] font-medium">Ask Acme</span>
+            </span>
+            <div class="ml-auto flex items-center gap-1">
+              <button
+                type="button"
+                class="text-muted-foreground hover:bg-accent inline-flex h-7 w-7 items-center justify-center rounded-md"
+                aria-label="Minimize chat"
+                tabindex="-1"
+              >
+                <Minus size={14} />
+              </button>
+              <button
+                type="button"
+                class="text-muted-foreground hover:bg-accent inline-flex h-7 w-7 items-center justify-center rounded-md"
+                aria-label="Expand chat"
+                tabindex="-1"
+              >
+                <Maximize2 size={14} />
+              </button>
+              <button
+                type="button"
+                data-ai-close
+                class="text-muted-foreground hover:bg-accent inline-flex h-7 w-7 items-center justify-center rounded-md"
+                aria-label="Clear chat"
+              >
+                <X size={14} />
+              </button>
+            </div>
+          </div>
+
+          <div class="relative flex min-h-0 flex-1 flex-col">
+            <div
+              class="from-card pointer-events-none absolute top-0 left-0 z-10 h-4 bg-gradient-to-b to-transparent"
+              style="right: 6px"
+              aria-hidden="true"
+            >
+            </div>
+            <div data-ai-scroll class="ai-chat-scroll flex-1 overflow-y-auto py-3">
+              <div class="mx-auto w-full max-w-3xl px-4">
+                <div data-ai-empty class="flex w-full flex-col px-1 py-6">
+                  <div class="mb-4">
+                    <h2 class="text-foreground text-sm font-semibold">How can I help?</h2>
+                    <p class="text-muted-foreground text-xs">Ask anything about your data.</p>
+                  </div>
+                  <p class="text-muted-foreground mt-1 flex items-start gap-1.5 text-[11px] leading-snug">
+                    <Paperclip size={11} class="mt-0.5 shrink-0" />
+                    <span>Tip: attach a CSV, PDF, or image and I'll import the records for you.</span>
+                  </p>
+                </div>
+
+                <div data-ai-turns class="hidden flex-col"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mx-auto w-full max-w-3xl shrink-0">
+            <div class="shrink-0 px-2 pt-1 pb-2">
+              <div class="relative z-10">
+                <form data-ai-form class="bg-card border-border flex flex-col rounded-xl border shadow-sm">
+                  <ul data-ai-pending-attachments class="flex flex-wrap gap-1.5 px-2 pt-2">
+                    <li
+                      class="border-border bg-accent text-foreground flex max-w-[220px] items-center gap-1.5 rounded-md border px-2 py-1 text-xs"
+                    >
+                      <Paperclip size={12} class="text-muted-foreground shrink-0" />
+                      <span class="truncate" title="report-Q3-2026.csv">report-Q3-2026.csv</span>
+                      <span
+                        class="text-muted-foreground -mr-1 inline-flex h-4 w-4 shrink-0 items-center justify-center rounded"
+                        aria-hidden="true"
+                      >
+                        <X size={10} />
+                      </span>
+                    </li>
+                  </ul>
+                  <textarea
+                    data-ai-input
+                    rows="1"
+                    readonly
+                    autocomplete="off"
+                    class="text-foreground placeholder:text-muted-foreground block max-h-[4.5rem] min-h-[1.5rem] w-full cursor-pointer resize-none overflow-hidden bg-transparent px-3 pt-2 pb-1 text-[13px] focus:outline-none"
+                    >Import these records</textarea
+                  >
+                  <div class="flex items-center justify-end gap-1 px-1.5 pb-1.5">
+                    <button
+                      type="button"
+                      class="text-muted-foreground hover:text-foreground hover:bg-accent inline-flex h-7 w-7 items-center justify-center rounded-full"
+                      aria-label="Attach files"
+                      tabindex="-1"
+                    >
+                      <Paperclip size={14} />
+                    </button>
+                    <button
+                      type="submit"
+                      data-ai-send
+                      disabled
+                      class="bg-secondary text-secondary-foreground inline-flex h-7 w-7 items-center justify-center rounded-full transition-colors disabled:cursor-not-allowed"
+                      aria-label="Send message"
+                    >
+                      <ArrowUp size={14} />
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="md:col-span-3">
+        <p class="text-primary mb-3 text-xs font-medium tracking-wider uppercase">AI Chat</p>
+        <h2 class="mb-4 text-3xl font-medium tracking-normal text-balance sm:text-4xl">
+          An assistant that knows your data.
+        </h2>
+        <p class="text-muted-foreground mb-8 text-base leading-relaxed font-light">
+          Ask questions in plain English and get answers based on your actual records, history, and configuration. Pull
+          custom reports and surface what your data is quietly doing, without opening a single screen.
+        </p>
+
+        <div class="space-y-5">
+          <div class="flex gap-3">
+            <div class="bg-primary/10 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg">
+              <MessageCircleQuestion size={16} stroke-width={1.5} class="text-primary" />
+            </div>
+            <div>
+              <h3 class="mb-1 text-base font-semibold tracking-tight">Ask anything</h3>
+              <p class="text-muted-foreground text-sm leading-relaxed font-light">
+                "Which customers churned last quarter?" "What's the trend on our top metric?" Answers come from your
+                real data, not generic advice.
+              </p>
+            </div>
+          </div>
+          <div class="flex gap-3">
+            <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-600/10">
+              <ScanSearch size={16} stroke-width={1.5} class="text-emerald-600" />
+            </div>
+            <div>
+              <h3 class="mb-1 text-base font-semibold tracking-tight">Catch what you missed</h3>
+              <p class="text-muted-foreground text-sm leading-relaxed font-light">
+                "Which records have stalled this month?" "Find anomalies in this quarter's data." The assistant scans
+                your data and surfaces the answers.
+              </p>
+            </div>
+          </div>
+          <div class="flex gap-3">
+            <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-violet-500/10">
+              <ChartLine size={16} stroke-width={1.5} class="text-violet-600" />
+            </div>
+            <div>
+              <h3 class="mb-1 text-base font-semibold tracking-tight">Custom reports on the fly</h3>
+              <p class="text-muted-foreground text-sm leading-relaxed font-light">
+                "Compare this year versus last." "Show me the top items sorted by impact." No dashboards to configure,
+                just answers.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .ai-chat-card {
+    border-color: color-mix(in srgb, var(--border) 90%, transparent);
+  }
+
+  .ai-chat-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, var(--muted-foreground) 30%, transparent) transparent;
+  }
+  .ai-chat-scroll::-webkit-scrollbar {
+    width: 6px;
+  }
+  .ai-chat-scroll::-webkit-scrollbar-thumb {
+    background-color: color-mix(in srgb, var(--muted-foreground) 30%, transparent);
+    border-radius: 3px;
+  }
+
+  .ai-chat-shimmer {
+    background: linear-gradient(
+      90deg,
+      var(--muted-foreground) 0%,
+      var(--muted-foreground) 40%,
+      var(--foreground) 50%,
+      var(--muted-foreground) 60%,
+      var(--muted-foreground) 100%
+    );
+    background-size: 200% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    animation: ai-chat-shimmer 1.6s ease-in-out infinite;
+  }
+  @keyframes ai-chat-shimmer {
+    0% {
+      background-position: 100% 0;
+    }
+    100% {
+      background-position: -100% 0;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ai-chat-shimmer {
+      animation: none;
+      color: var(--muted-foreground);
+      -webkit-text-fill-color: var(--muted-foreground);
+    }
+  }
+
+  .ai-chat-md p {
+    margin: 0.5em 0;
+    white-space: pre-wrap;
+  }
+  .ai-chat-md > *:first-child {
+    margin-top: 0;
+  }
+  .ai-chat-md > *:last-child {
+    margin-bottom: 0;
+  }
+  .ai-chat-md strong {
+    font-weight: 600;
+  }
+  .ai-chat-md ul {
+    list-style: disc;
+    margin: 0.4em 0;
+    padding-left: 1.25rem;
+  }
+  .ai-chat-md li {
+    margin: 0.15em 0;
+  }
+
+  .ai-chat-tool[data-open='true'] .ai-chat-tool-chevron {
+    transform: rotate(90deg);
+  }
+  .ai-chat-tool-chevron {
+    transition: transform 200ms ease-out;
+  }
+
+  .ai-chat-caret {
+    display: inline-block;
+    width: 4px;
+    height: 12px;
+    margin-left: 2px;
+    transform: translateY(2px);
+    background: currentColor;
+    animation: ai-chat-blink 1s steps(2, start) infinite;
+  }
+  @keyframes ai-chat-blink {
+    to {
+      visibility: hidden;
+    }
+  }
+</style>
+
+<script>
+  type DemoState = 'idle' | 'running';
+
+  const PREFILL_TEXT = 'Import these records';
+
+  const IMPORT_REPLY = [
+    "Done! I've imported all **45 records** from your Q3 report into the **Customers** workspace.",
+    'They were auto-tagged based on your existing routing rules:',
+    '- **Acme Co.** → Enterprise',
+    '- **Beta LLC** → SMB',
+    '- **Gamma Inc.** → Mid-market',
+    '- **Delta Group** → Enterprise',
+    "All records are flagged for review, so you can check them and adjust any tags before they're finalized.",
+  ].join('\n\n');
+
+  const FOLLOWUP_PROMPT = 'Now show me a summary report for last quarter';
+  const FOLLOWUP_REPLY = [
+    "Here's your summary for **Q3 2026**:",
+    '- **Enterprise** — 18 new accounts (12% over target)',
+    '- **Mid-market** — 24 new accounts (on track)',
+    '- **SMB** — 41 new accounts',
+    '- **Self-serve** — 189 new signups',
+    '- **Churn** — 7 accounts (under forecast)',
+    'You added **272 new accounts** across **4 segments** last quarter, about **8% over** your target. The overage is mostly Enterprise — two deals closed earlier than planned.',
+  ].join('\n\n');
+
+  const THINKING_MS = 2250;
+  const FOLLOWUP_THINKING_MS = 2250;
+  const STREAM_INTERVAL_MS = 14;
+  const TYPE_INTERVAL_MS = 38;
+  const PAUSE_BEFORE_TYPING_MS = 900;
+  const PAUSE_BEFORE_SEND_MS = 450;
+
+  const card = document.getElementById('ai-chat-demo');
+  if (card) {
+    const form = card.querySelector<HTMLFormElement>('[data-ai-form]')!;
+    const input = card.querySelector<HTMLTextAreaElement>('[data-ai-input]')!;
+    const sendBtn = card.querySelector<HTMLButtonElement>('[data-ai-send]')!;
+    const empty = card.querySelector<HTMLElement>('[data-ai-empty]')!;
+    const turns = card.querySelector<HTMLElement>('[data-ai-turns]')!;
+    const scrollEl = card.querySelector<HTMLElement>('[data-ai-scroll]')!;
+    const closeBtn = card.querySelector<HTMLButtonElement>('[data-ai-close]')!;
+    const pendingAttachments = card.querySelector<HTMLUListElement>('[data-ai-pending-attachments]')!;
+    const pendingAttachmentsHtml = pendingAttachments.innerHTML;
+
+    let state: DemoState = 'idle';
+    let thinkingTimer: number | null = null;
+    let streamTimer: number | null = null;
+    let typingTimer: number | null = null;
+    let pauseTimer: number | null = null;
+    let cycleTimer: number | null = null;
+
+    function updateSendButton() {
+      const hasText = input.value.trim().length > 0;
+      sendBtn.disabled = !hasText || state === 'running';
+      if (hasText && state === 'idle') {
+        sendBtn.classList.remove('bg-secondary', 'text-secondary-foreground');
+        sendBtn.classList.add('bg-foreground', 'text-background');
+      } else {
+        sendBtn.classList.add('bg-secondary', 'text-secondary-foreground');
+        sendBtn.classList.remove('bg-foreground', 'text-background');
+      }
+    }
+
+    function autoResize() {
+      input.style.height = 'auto';
+      input.style.height = Math.min(input.scrollHeight, 72) + 'px';
+    }
+
+    function scrollToBottom() {
+      scrollEl.scrollTop = scrollEl.scrollHeight;
+    }
+
+    function escapeHtml(s: string): string {
+      return s
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function renderInline(s: string): string {
+      return escapeHtml(s).replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+    }
+
+    function renderAssistantBody(text: string): string {
+      const blocks = text.split(/\n{2,}/);
+      return blocks
+        .map((block) => {
+          const lines = block.split('\n');
+          const isList = lines.every((line) => /^\s*-\s+/.test(line));
+          if (isList) {
+            const items = lines.map((line) => `<li>${renderInline(line.replace(/^\s*-\s+/, ''))}</li>`).join('');
+            return `<ul>${items}</ul>`;
+          }
+          return `<p>${renderInline(block).replace(/\n/g, '<br>')}</p>`;
+        })
+        .join('');
+    }
+
+    function addUserTurn(text: string, attachments: string[] = []): HTMLElement {
+      const turn = document.createElement('div');
+      turn.className = 'flex flex-col gap-5 pb-3';
+      const attachmentList =
+        attachments.length === 0
+          ? ''
+          : `
+        <ul class="flex max-w-[85%] flex-col items-end gap-1" data-ai-turn-attachments></ul>
+      `;
+      turn.innerHTML = `
+        <div class="flex flex-col items-end gap-1">
+          ${attachmentList}
+          <div class="bg-background border-border text-foreground max-w-[85%] rounded-lg border px-3 py-2 text-[13px] whitespace-pre-wrap"></div>
+        </div>
+        <div data-ai-assistant class="group/assistant"></div>
+      `;
+      const userBubble = turn.querySelector('.whitespace-pre-wrap') as HTMLElement;
+      userBubble.textContent = text;
+
+      const attachmentsUl = turn.querySelector<HTMLUListElement>('[data-ai-turn-attachments]');
+      if (attachmentsUl) {
+        attachments.forEach((filename) => {
+          const li = document.createElement('li');
+          li.className =
+            'bg-background border-border text-foreground flex max-w-full items-center gap-1.5 rounded-md border px-2 py-1 text-[12px]';
+          li.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground shrink-0"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+            <span class="truncate"></span>
+          `;
+          (li.querySelector('.truncate') as HTMLElement).textContent = filename;
+          (li.querySelector('.truncate') as HTMLElement).setAttribute('title', filename);
+          attachmentsUl.appendChild(li);
+        });
+      }
+
+      turns.appendChild(turn);
+      return turn.querySelector('[data-ai-assistant]') as HTMLElement;
+    }
+
+    function renderThinking(assistant: HTMLElement, initialLabel: string) {
+      assistant.innerHTML = `
+        <div data-ai-thinking class="relative flex h-5 items-center justify-start">
+          <span class="ai-chat-shimmer ai-chat-thinking-label absolute inset-0 flex items-center text-[13px] transition-all duration-200 ease-out">${escapeHtml(initialLabel)}…</span>
+        </div>
+      `;
+    }
+
+    function swapThinkingLabel(container: HTMLElement, newText: string) {
+      const current = container.querySelector('.ai-chat-thinking-label:not(.is-leaving)') as HTMLElement | null;
+      if (!current) return;
+
+      const next = document.createElement('span');
+      next.className =
+        'ai-chat-shimmer ai-chat-thinking-label absolute inset-0 flex items-center text-[13px] transition-all duration-200 ease-out opacity-0 translate-y-1';
+      next.textContent = newText + '…';
+      container.appendChild(next);
+
+      void next.offsetWidth;
+
+      next.classList.remove('opacity-0', 'translate-y-1');
+      current.classList.add('is-leaving', 'opacity-0', '-translate-y-1');
+
+      window.setTimeout(() => {
+        current.remove();
+      }, 220);
+    }
+
+    function cycleThinkingLabels(assistant: HTMLElement, labels: readonly string[], totalMs: number) {
+      if (labels.length <= 1) return;
+      const slot = totalMs / labels.length;
+      let i = 1;
+      const tick = () => {
+        const container = assistant.querySelector('[data-ai-thinking]') as HTMLElement | null;
+        if (!container) return;
+        swapThinkingLabel(container, labels[i]);
+        i++;
+        if (i < labels.length) {
+          cycleTimer = window.setTimeout(tick, slot);
+        } else {
+          cycleTimer = null;
+        }
+      };
+      cycleTimer = window.setTimeout(tick, slot);
+    }
+
+    function renderDone(
+      assistant: HTMLElement,
+      durationSeconds: number,
+      fullText: string,
+      toolCalls: readonly string[],
+      onDone?: () => void
+    ) {
+      const noun = durationSeconds === 1 ? 'second' : 'seconds';
+      const toolItems = toolCalls.map(() => `<li></li>`).join('');
+      assistant.innerHTML = `
+        <div class="ai-chat-tool mb-2 block select-none" data-open="false">
+          <button
+            type="button"
+            data-ai-tool-toggle
+            class="group text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-md text-[12px] transition-colors focus:outline-none"
+          >
+            <span class="font-medium">Worked for ${durationSeconds} ${noun}</span>
+            <span class="ai-chat-tool-chevron inline-flex"></span>
+          </button>
+          <div class="ai-chat-tool-body grid overflow-hidden transition-[grid-template-rows] duration-200 ease-out" style="grid-template-rows: 0fr">
+            <div class="min-h-0 overflow-hidden">
+              <ul class="text-muted-foreground mt-1.5 ml-4 flex list-none flex-col gap-1 text-[12px]">
+                ${toolItems}
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="ai-chat-md text-foreground text-[13px]" data-ai-stream></div>
+      `;
+
+      const toolLis = assistant.querySelectorAll('.ai-chat-tool-body li');
+      toolCalls.forEach((label, idx) => {
+        const li = toolLis[idx];
+        if (li) li.textContent = label;
+      });
+
+      const chev = assistant.querySelector('.ai-chat-tool-chevron') as HTMLElement;
+      chev.innerHTML =
+        '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>';
+
+      const tool = assistant.querySelector('.ai-chat-tool') as HTMLElement;
+      const toggle = assistant.querySelector('[data-ai-tool-toggle]') as HTMLButtonElement;
+      const body = assistant.querySelector('.ai-chat-tool-body') as HTMLElement;
+      toggle.addEventListener('click', () => {
+        const isOpen = tool.dataset.open === 'true';
+        tool.dataset.open = isOpen ? 'false' : 'true';
+        body.style.gridTemplateRows = isOpen ? '0fr' : '1fr';
+      });
+
+      const streamEl = assistant.querySelector('[data-ai-stream]') as HTMLElement;
+      streamText(streamEl, fullText, onDone);
+    }
+
+    function streamText(target: HTMLElement, text: string, onDone?: () => void) {
+      let i = 0;
+      target.innerHTML = '<span class="ai-chat-caret"></span>';
+      const caret = target.querySelector('.ai-chat-caret') as HTMLElement;
+      const step = Math.max(1, Math.floor(text.length / 240));
+      streamTimer = window.setInterval(() => {
+        i = Math.min(text.length, i + step);
+        const partial = text.slice(0, i);
+        target.innerHTML = renderAssistantBody(partial);
+        if (i < text.length) {
+          target.appendChild(caret);
+        }
+        scrollToBottom();
+        if (i >= text.length) {
+          if (streamTimer !== null) window.clearInterval(streamTimer);
+          streamTimer = null;
+          state = 'idle';
+          updateSendButton();
+          onDone?.();
+        }
+      }, STREAM_INTERVAL_MS);
+    }
+
+    interface TurnPlan {
+      reply: string;
+      thinkingMs: number;
+      toolCalls: readonly string[];
+      runningLabels: readonly string[];
+      onDone?: () => void;
+    }
+
+    const IMPORT_TOOLS = [
+      'Read your Q3 report',
+      'Extracted 45 records',
+      'Tagged by your routing rules',
+    ];
+    const IMPORT_RUNNING = [
+      'Reading your Q3 report',
+      'Extracting records',
+      'Tagging by your routing rules',
+    ];
+    const REPORT_TOOLS = [
+      'Queried last quarter’s records',
+      'Rolled up activity by segment',
+      'Compared totals against your targets',
+    ];
+    const REPORT_RUNNING = [
+      'Querying last quarter’s records',
+      'Rolling up activity by segment',
+      'Comparing against your targets',
+    ];
+
+    function sendMessage(text: string, plan: TurnPlan) {
+      if (state !== 'idle' || !text.trim()) return;
+      state = 'running';
+
+      const attachments = Array.from(pendingAttachments.querySelectorAll<HTMLElement>('li > .truncate')).map(
+        (el) => el.textContent ?? ''
+      );
+
+      empty.classList.add('hidden');
+      turns.classList.remove('hidden');
+      turns.classList.add('flex');
+
+      input.value = '';
+      pendingAttachments.innerHTML = '';
+      autoResize();
+      updateSendButton();
+
+      const assistant = addUserTurn(text, attachments);
+      renderThinking(assistant, plan.runningLabels[0] ?? 'Thinking');
+      cycleThinkingLabels(assistant, plan.runningLabels, plan.thinkingMs);
+      scrollToBottom();
+
+      const start = performance.now();
+      thinkingTimer = window.setTimeout(() => {
+        thinkingTimer = null;
+        if (cycleTimer !== null) {
+          window.clearTimeout(cycleTimer);
+          cycleTimer = null;
+        }
+        const durationSeconds = Math.max(1, Math.round((performance.now() - start) / 1000));
+        renderDone(assistant, durationSeconds, plan.reply, plan.toolCalls, plan.onDone);
+        scrollToBottom();
+      }, plan.thinkingMs);
+    }
+
+    function typePromptThenSend(text: string, plan: TurnPlan) {
+      state = 'running';
+      input.value = '';
+      autoResize();
+      updateSendButton();
+
+      let i = 0;
+      typingTimer = window.setInterval(() => {
+        i++;
+        input.value = text.slice(0, i);
+        autoResize();
+        if (i >= text.length) {
+          if (typingTimer !== null) window.clearInterval(typingTimer);
+          typingTimer = null;
+          pauseTimer = window.setTimeout(() => {
+            pauseTimer = null;
+            state = 'idle';
+            sendMessage(text, plan);
+          }, PAUSE_BEFORE_SEND_MS);
+        }
+      }, TYPE_INTERVAL_MS);
+    }
+
+    function scheduleFollowup() {
+      pauseTimer = window.setTimeout(() => {
+        pauseTimer = null;
+        typePromptThenSend(FOLLOWUP_PROMPT, {
+          reply: FOLLOWUP_REPLY,
+          thinkingMs: FOLLOWUP_THINKING_MS,
+          toolCalls: REPORT_TOOLS,
+          runningLabels: REPORT_RUNNING,
+        });
+      }, PAUSE_BEFORE_TYPING_MS);
+    }
+
+    const IMPORT_PLAN: TurnPlan = {
+      reply: IMPORT_REPLY,
+      thinkingMs: THINKING_MS,
+      toolCalls: IMPORT_TOOLS,
+      runningLabels: IMPORT_RUNNING,
+      onDone: scheduleFollowup,
+    };
+
+    function resetChat() {
+      if (thinkingTimer !== null) {
+        window.clearTimeout(thinkingTimer);
+        thinkingTimer = null;
+      }
+      if (streamTimer !== null) {
+        window.clearInterval(streamTimer);
+        streamTimer = null;
+      }
+      if (typingTimer !== null) {
+        window.clearInterval(typingTimer);
+        typingTimer = null;
+      }
+      if (pauseTimer !== null) {
+        window.clearTimeout(pauseTimer);
+        pauseTimer = null;
+      }
+      if (cycleTimer !== null) {
+        window.clearTimeout(cycleTimer);
+        cycleTimer = null;
+      }
+      turns.innerHTML = '';
+      turns.classList.add('hidden');
+      turns.classList.remove('flex');
+      empty.classList.remove('hidden');
+      input.value = PREFILL_TEXT;
+      pendingAttachments.innerHTML = pendingAttachmentsHtml;
+      autoResize();
+      state = 'idle';
+      updateSendButton();
+      scrollEl.scrollTop = 0;
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      sendMessage(input.value, IMPORT_PLAN);
+    });
+
+    input.addEventListener('input', () => {
+      autoResize();
+      updateSendButton();
+    });
+
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage(input.value, IMPORT_PLAN);
+      }
+    });
+
+    closeBtn.addEventListener('click', () => {
+      resetChat();
+    });
+
+    updateSendButton();
+  }
+</script>

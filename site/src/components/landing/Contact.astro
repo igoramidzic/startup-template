@@ -1,0 +1,35 @@
+---
+import { ExternalLink } from '@lucide/astro';
+import { links } from '../../config';
+---
+
+<section class="px-5 py-16 sm:py-20">
+  <div class="mx-auto max-w-[60rem]">
+    <p class="text-primary mb-3 text-xs font-medium tracking-wider uppercase">Get in touch</p>
+
+    <h2 class="mb-6 max-w-2xl text-3xl font-medium tracking-normal text-balance sm:text-4xl">Still have questions?</h2>
+
+    <p class="text-muted-foreground mb-8 max-w-xl leading-relaxed font-light sm:leading-relaxed">
+      Need help getting started or want to suggest a feature? We read every message.
+    </p>
+
+    <div class="space-y-4">
+      <p class="text-base font-light">
+        Email us at
+        <a href="mailto:hello@example.com" class="text-primary font-medium hover:underline">hello@example.com</a>
+      </p>
+      <p class="text-base font-light">
+        Request features and vote on ideas on the
+        <a
+          href={links.feedback}
+          target="_blank"
+          rel="noopener"
+          class="text-primary inline-flex items-center gap-1 font-medium hover:underline"
+        >
+          public board
+          <ExternalLink size={12} />
+        </a>
+      </p>
+    </div>
+  </div>
+</section>

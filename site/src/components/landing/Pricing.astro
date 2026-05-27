@@ -1,0 +1,108 @@
+---
+import { CircleCheck } from '@lucide/astro';
+import { links } from '../../config';
+
+const plans = [
+  {
+    id: 'monthly',
+    name: 'Monthly',
+    price: '19',
+    period: 'per month',
+    description: 'Try it out, cancel any time.',
+    features: [
+      'Unlimited integrations',
+      'Unlimited records',
+      'Smart routing rules',
+      'Reports & insights',
+      'AI assistant',
+      'Email support',
+    ],
+    ctaText: 'Start free trial',
+  },
+  {
+    id: 'yearly',
+    name: 'Yearly',
+    price: '149',
+    period: 'per year',
+    description: 'Save 35% when you commit.',
+    features: ['Everything in Monthly', 'Same features, fewer bills', 'Save a third by paying annually'],
+    ctaText: 'Start free trial',
+  },
+  {
+    id: 'lifetime',
+    name: 'Lifetime',
+    price: '399',
+    period: 'one-time',
+    description: 'Pay once, use forever.',
+    features: ['All features, forever', 'Lifetime updates', 'No recurring charges'],
+    ctaText: 'Buy now',
+  },
+];
+---
+
+<section class="px-5 py-16 sm:py-20">
+  <div class="mx-auto max-w-[60rem]">
+    <p class="text-primary mb-3 text-xs font-medium tracking-wider uppercase">Pricing</p>
+    <div class="mb-12 max-w-2xl sm:mb-14">
+      <h2 class="mb-4 text-3xl font-medium tracking-normal text-balance sm:text-4xl">
+        One product, one price, no surprises.
+      </h2>
+      <p class="text-muted-foreground max-w-md text-base leading-relaxed font-light">
+        Start with a 7-day free trial. Cancel any time. No add-ons, no per-feature upsells, no hidden&nbsp;tier.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 gap-0 md:grid-cols-3">
+      {
+        plans.map((plan) => (
+          <div class="pricing-border flex flex-col border-t p-6 first:border-t-0 md:border-t-0 md:border-l md:px-8 md:last:border-r">
+            <h3 class="text-lg font-semibold tracking-tight">{plan.name}</h3>
+
+            <div class="mt-4 flex items-baseline">
+              <span class="text-muted-foreground text-sm">$</span>
+              <span class="text-4xl font-medium tracking-normal">{plan.price}</span>
+              <span class="text-muted-foreground ml-2 text-sm font-light">{plan.period}</span>
+            </div>
+
+            <p class="text-muted-foreground mt-1 text-sm font-light">{plan.description}</p>
+
+            <div class="mt-6">
+              <p class="mb-4 text-sm font-medium">What's included</p>
+              <ul class="space-y-3">
+                {plan.features.map((feature) => (
+                  <li class="flex items-center gap-2.5 text-sm">
+                    <CircleCheck size={18} class="text-primary shrink-0" stroke-width={2} />
+                    <span class="font-light">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div class="mt-auto pt-8">
+              <a
+                href={links.signup}
+                class="bg-foreground text-background inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-medium transition-opacity hover:opacity-90"
+              >
+                {plan.ctaText}
+              </a>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="border-primary mt-12 max-w-md border-l-2 py-1 pl-5">
+      <p class="text-muted-foreground text-sm leading-relaxed font-light">
+        Need more time to decide? Email us at <a href="mailto:hello@example.com" class="text-primary hover:underline"
+          >hello@example.com</a
+        > and we will set you up with an extended trial.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .pricing-border {
+    border-color: oklch(0.95 0 0);
+  }
+</style>

@@ -1,0 +1,42 @@
+---
+const stats = [
+  {
+    value: '10k+',
+    label: 'Teams using Acme',
+    description: 'Companies of every size, from solo founders to public companies, rely on Acme every day.',
+  },
+  {
+    value: '2 min',
+    label: 'From signup to live',
+    description: 'Create an account, connect a source, see your first results. That is the whole onboarding.',
+  },
+  {
+    value: '0',
+    label: 'Lock-in',
+    description: 'Export your data any time. No proprietary formats, no exit fees, no convincing required.',
+  },
+];
+---
+
+<section class="px-5 py-16 sm:py-20">
+  <div class="mx-auto max-w-[60rem]">
+    <p class="text-primary mb-3 text-xs font-medium tracking-wider uppercase">By the numbers</p>
+    <div class="mb-12 max-w-2xl sm:mb-14">
+      <h2 class="text-3xl font-medium tracking-normal text-balance sm:text-4xl">
+        What working with Acme looks like.
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 gap-x-10 gap-y-10 sm:grid-cols-3">
+      {
+        stats.map((stat) => (
+          <div>
+            <div class="text-primary mb-2 text-5xl font-medium tracking-normal sm:text-6xl">{stat.value}</div>
+            <h3 class="mb-1 text-base font-semibold tracking-tight">{stat.label}</h3>
+            <p class="text-muted-foreground text-sm leading-relaxed font-light">{stat.description}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

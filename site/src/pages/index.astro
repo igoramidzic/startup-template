@@ -1,10 +1,51 @@
 ---
+import BuiltBy from '../components/landing/BuiltBy.astro';
+import Contact from '../components/landing/Contact.astro';
+import EntryPoints from '../components/landing/EntryPoints.astro';
+import FAQ from '../components/landing/FAQ.astro';
+import Features from '../components/landing/Features.astro';
+import FeaturesAI from '../components/landing/FeaturesAI.astro';
+import FeaturesReports from '../components/landing/FeaturesReports.astro';
+import FeaturesTracking from '../components/landing/FeaturesTracking.astro';
+import Hero from '../components/landing/Hero.astro';
+import Pitch from '../components/landing/Pitch.astro';
+import Pricing from '../components/landing/Pricing.astro';
+import Stats from '../components/landing/Stats.astro';
+import Testimonials from '../components/landing/Testimonials.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="Home" description="A starter site.">
-  <section class="mx-auto max-w-3xl px-6 py-24">
-    <h1 class="text-4xl font-semibold tracking-tight">Hello, world.</h1>
-    <p class="text-muted-foreground mt-4">Replace this with your landing page.</p>
-  </section>
+<BaseLayout
+  title="Your product tagline goes here"
+  description="Acme is a placeholder SaaS landing page. Replace this copy with your own."
+>
+  <Hero />
+  <Features />
+  <div class="mx-auto h-px max-w-[60rem]" style="background: color-mix(in srgb, var(--border) 60%, transparent)"></div>
+  <EntryPoints />
+  <div class="mx-auto h-px max-w-[60rem]" style="background: color-mix(in srgb, var(--border) 60%, transparent)"></div>
+  <Stats />
+  <div class="mx-auto h-px max-w-[60rem]" style="background: color-mix(in srgb, var(--border) 60%, transparent)"></div>
+  <FeaturesTracking />
+  <div class="mx-auto h-px max-w-[60rem]" style="background: color-mix(in srgb, var(--border) 60%, transparent)"></div>
+  <Testimonials />
+  <div class="mx-auto h-px max-w-[60rem]" style="background: color-mix(in srgb, var(--border) 60%, transparent)"></div>
+  <FeaturesAI />
+  <div class="mx-auto h-px max-w-[60rem]" style="background: color-mix(in srgb, var(--border) 60%, transparent)"></div>
+  <FeaturesReports />
+  <div
+    id="pricing"
+    class="mx-auto h-px max-w-[60rem] scroll-mt-16"
+    style="background: color-mix(in srgb, var(--border) 60%, transparent)"
+  >
+  </div>
+  <Pricing />
+  <div class="mx-auto h-px max-w-[60rem]" style="background: color-mix(in srgb, var(--border) 60%, transparent)"></div>
+  <Pitch />
+  <div class="mx-auto h-px max-w-[60rem]" style="background: color-mix(in srgb, var(--border) 60%, transparent)"></div>
+  <BuiltBy />
+  <div class="mx-auto h-px max-w-[60rem]" style="background: color-mix(in srgb, var(--border) 60%, transparent)"></div>
+  <FAQ />
+  <div class="mx-auto h-px max-w-[60rem]" style="background: color-mix(in srgb, var(--border) 60%, transparent)"></div>
+  <Contact />
 </BaseLayout>

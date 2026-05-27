@@ -1,0 +1,157 @@
+---
+const faqs = [
+  {
+    question: 'What is Acme?',
+    answer:
+      'Acme is a placeholder product. Replace this with one or two sentences that describe what your product does in plain language, who it is for, and the outcome it delivers.',
+  },
+  {
+    question: 'Do I need to connect my existing tools?',
+    answer:
+      'While you can use Acme on its own, connecting your existing tools makes it much more powerful. Our integrations sync data automatically, so you spend less time copying and pasting and more time on the work that matters.',
+  },
+  {
+    question: 'What integrations are supported?',
+    answer:
+      'Acme supports the most popular tools across the categories our customers care about. When you sign up, you can search for and connect each one during onboarding. New integrations ship every month.',
+  },
+  {
+    question: 'How do targets work?',
+    answer:
+      'Targets let you set goals for any metric that matters to you. Set recurring targets (weekly or monthly limits), aspirational goals (build up a number over time), or one-time targets for specific projects.',
+  },
+  {
+    question: 'How does automation work?',
+    answer:
+      'Acme uses pattern detection and customizable rules to automate the busywork. You can also create custom rules to route or label records based on properties you choose. This keeps things consistent without manual work.',
+  },
+  {
+    question: 'What reports are available?',
+    answer:
+      'Acme provides trend tracking, segment breakdowns, and comparison reports. See your progress over time with intuitive charts and understand exactly what is driving the numbers each month.',
+  },
+  {
+    question: 'Is my data secure?',
+    answer:
+      'Absolutely. We use industry-standard encryption to protect your data. All connections are made through secure, audited providers. Your data is encrypted both in transit and at rest, and we never share it with third parties.',
+  },
+  {
+    question: 'What makes Acme different from other tools?',
+    answer:
+      'Acme combines the simplicity of a starter tool with the depth of an enterprise platform. Unlike spreadsheets, you get automation and structure for free. Unlike complex software, we stay focused on the outcomes that matter.',
+  },
+  {
+    question: 'Can I try Acme before paying?',
+    answer: 'Yes! We offer a 7-day free trial. You can explore all features and decide if Acme is right for you.',
+  },
+  {
+    question: 'How long does it take to set up?',
+    answer:
+      'Most users are up and running in under 10 minutes. Sign up, connect your tools, and Acme will automatically start syncing and organizing. You can customize as you go.',
+  },
+  {
+    question: 'Do you offer support?',
+    answer:
+      'Yes! We offer priority email support to help you get the most out of Acme. You can reach us at hello@example.com or use the contact button below.',
+  },
+];
+---
+
+<section class="px-5 py-16 sm:py-20">
+  <div class="mx-auto max-w-[60rem]">
+    <p class="text-primary mb-3 text-xs font-medium tracking-wider uppercase">FAQ</p>
+    <div class="mb-12 max-w-2xl sm:mb-14">
+      <h2 class="mb-4 text-3xl font-medium tracking-normal text-balance sm:text-4xl">Quick answers.</h2>
+      <p class="text-muted-foreground max-w-md text-base leading-relaxed font-light">
+        From setup to daily use, the questions that come up most. If something is missing, email us.
+      </p>
+    </div>
+
+    <div class="space-y-3">
+      {
+        faqs.map((faq) => (
+          <details class="faq-item faq-border group border-b last:border-b-0">
+            <summary class="flex w-full cursor-pointer items-center justify-between py-4 text-left font-medium select-none">
+              <span>{faq.question}</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="shrink-0 transition-transform duration-200 group-open:rotate-180"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </summary>
+            <div class="faq-content pb-10">
+              <p class="text-muted-foreground leading-relaxed font-light">{faq.answer}</p>
+            </div>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-content {
+    overflow: hidden;
+  }
+  .faq-border {
+    border-color: color-mix(in srgb, var(--border) 60%, transparent);
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.faq-item').forEach((details) => {
+    const summary = details.querySelector('summary')!;
+    const content = details.querySelector('.faq-content') as HTMLElement;
+    let animation: Animation | null = null;
+    let isOpen = details.hasAttribute('open');
+
+    function open() {
+      isOpen = true;
+      details.setAttribute('open', '');
+      const endHeight = content.scrollHeight;
+      animation = content.animate(
+        [
+          { height: '0px', opacity: 0, paddingBottom: '0px' },
+          { height: endHeight + 'px', opacity: 1, paddingBottom: '2.5rem' },
+        ],
+        { duration: 200, easing: 'ease-out' }
+      );
+      animation.onfinish = () => (animation = null);
+    }
+
+    function close() {
+      isOpen = false;
+      const startHeight = content.offsetHeight;
+      animation = content.animate(
+        [
+          { height: startHeight + 'px', opacity: 1, paddingBottom: '2.5rem' },
+          { height: '0px', opacity: 0, paddingBottom: '0px' },
+        ],
+        { duration: 200, easing: 'ease-out' }
+      );
+      animation.onfinish = () => {
+        details.removeAttribute('open');
+        animation = null;
+      };
+    }
+
+    summary.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (animation) animation.cancel();
+      if (!isOpen) {
+        open();
+      } else {
+        close();
+      }
+    });
+  });
+</script>

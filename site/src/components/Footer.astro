@@ -1,10 +1,135 @@
 ---
-import { siteConfig } from '../config';
+import {
+  BookOpen,
+  Map,
+  Mail,
+  Megaphone,
+  MessageSquare,
+  Newspaper,
+  Rocket,
+  ScrollText,
+  Shield,
+  Sparkles,
+  Wallet,
+} from '@lucide/astro';
+import { links, siteConfig } from '../config';
+
+const currentYear = new Date().getFullYear();
+
+const product = [
+  { label: 'Get Started', href: links.signup, icon: Rocket },
+  { label: 'Pricing', href: '/#pricing', icon: Wallet },
+];
+
+const resources = [
+  { label: 'Docs', href: '#', icon: BookOpen },
+  { label: 'Blog', href: '/blog', icon: Newspaper },
+  { label: 'Roadmap', href: links.roadmap, icon: Map, external: true },
+  { label: 'Feedback', href: links.feedback, icon: MessageSquare, external: true },
+  { label: 'Updates', href: links.updates, icon: Megaphone, external: true },
+];
+
+const getHelp = [
+  { label: 'Contact', href: links.support, icon: Mail },
+  { label: 'Privacy', href: '/privacy', icon: Shield },
+  { label: 'Terms', href: '/terms-of-service', icon: ScrollText },
+];
+
+type FooterLink = {
+  label: string;
+  href: string;
+  icon?: typeof Sparkles;
+  external?: boolean;
+};
+
+const linkClass =
+  'text-muted-foreground hover:text-foreground inline-flex items-center gap-2 font-light transition-colors';
+const iconWrapClass = 'text-muted-foreground inline-flex h-4 w-4 shrink-0 items-center justify-center';
 ---
 
-<footer class="border-t">
-  <div class="text-muted-foreground mx-auto max-w-5xl px-5 py-8 text-sm">
-    © {new Date().getFullYear()}
-    {siteConfig.name}.
+<footer>
+  <hr class="mx-auto max-w-[60rem]" />
+  <div class="mx-auto max-w-[60rem] px-5 pt-16">
+    <div class="grid grid-cols-1 gap-x-10 gap-y-12 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
+      <!-- Brand column -->
+      <div>
+        <a href="/" aria-label={`${siteConfig.name} Home`} class="inline-flex items-center text-lg font-semibold">
+          {siteConfig.name}
+        </a>
+        <p class="text-muted-foreground mt-5 max-w-xs text-sm leading-relaxed font-light">
+          {siteConfig.description}
+        </p>
+        <div class="mt-5 flex items-center gap-3">
+          <a
+            href={links.support}
+            aria-label={`Email ${siteConfig.name} support`}
+            class="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <Mail size={18} stroke-width={1.5} />
+          </a>
+        </div>
+      </div>
+
+      <!-- Product -->
+      <div>
+        <h4 class="text-muted-foreground mb-4 text-xs font-semibold tracking-wider uppercase">Product</h4>
+        <ul class="space-y-3 text-sm">
+          {
+            (product as FooterLink[]).map((item) => (
+              <li>
+                <a href={item.href} class={linkClass}>
+                  <span class={iconWrapClass}>{item.icon && <item.icon size={14} stroke-width={1.5} />}</span>
+                  <span>{item.label}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Resources -->
+      <div>
+        <h4 class="text-muted-foreground mb-4 text-xs font-semibold tracking-wider uppercase">Resources</h4>
+        <ul class="space-y-3 text-sm">
+          {
+            (resources as FooterLink[]).map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  class={linkClass}
+                  {...(item.external ? { target: '_blank', rel: 'noopener' } : {})}
+                >
+                  <span class={iconWrapClass}>{item.icon && <item.icon size={14} stroke-width={1.5} />}</span>
+                  <span>{item.label}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Get Help -->
+      <div>
+        <h4 class="text-muted-foreground mb-4 text-xs font-semibold tracking-wider uppercase">Get Help</h4>
+        <ul class="space-y-3 text-sm">
+          {
+            (getHelp as FooterLink[]).map((item) => (
+              <li>
+                <a href={item.href} class={linkClass}>
+                  <span class={iconWrapClass}>{item.icon && <item.icon size={14} stroke-width={1.5} />}</span>
+                  <span>{item.label}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <hr class="mx-auto mt-16 max-w-[60rem]" />
+
+    <div class="text-muted-foreground flex flex-wrap items-center gap-x-4 gap-y-1 py-8 text-xs font-light">
+      <span>&copy; {currentYear} {siteConfig.name}, Inc.</span>
+    </div>
   </div>
 </footer>

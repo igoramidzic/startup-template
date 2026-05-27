@@ -1,14 +1,124 @@
 ---
-import { siteConfig } from '../config';
+import { ArrowRight, Menu, X } from '@lucide/astro';
+import { links, siteConfig } from '../config';
 ---
 
 <nav
-  class="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full border-b backdrop-blur-lg"
+  id="site-nav"
+  class="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full border-b border-transparent backdrop-blur-lg transition-[border-color] duration-200 select-none"
 >
-  <div class="mx-auto flex h-16 max-w-5xl items-center justify-between px-5">
-    <a href="/" class="font-semibold">{siteConfig.name}</a>
-    <div class="flex items-center gap-1">
-      <a href="/blog" class="hover:bg-accent rounded-md px-3 py-1.5 text-sm font-medium">Blog</a>
+  <div class="px-5">
+    <div class="mx-auto max-w-[60rem]">
+      <div class="flex h-16 items-center justify-between">
+        <div class="flex-shrink-0">
+          <a href="/" class="flex items-center text-base font-semibold" aria-label={`${siteConfig.name} Home`}>
+            {siteConfig.name}
+          </a>
+        </div>
+
+        <div class="hidden flex-1 items-center justify-center gap-1 md:flex">
+          <a
+            href="/#features"
+            class="text-foreground hover:bg-accent rounded-md px-3 py-1.5 text-sm font-medium transition-colors"
+          >
+            Features
+          </a>
+          <a
+            href="/#pricing"
+            class="text-foreground hover:bg-accent rounded-md px-3 py-1.5 text-sm font-medium transition-colors"
+          >
+            Pricing
+          </a>
+          <a
+            href="/blog"
+            class="text-foreground hover:bg-accent rounded-md px-3 py-1.5 text-sm font-medium transition-colors"
+          >
+            Blog
+          </a>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <a
+            href={links.app}
+            class="border-border bg-foreground text-background hover:bg-foreground/90 hidden items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-colors md:inline-flex"
+          >
+            Sign In
+            <ArrowRight size={16} />
+          </a>
+
+          <button
+            id="mobile-menu-toggle"
+            class="hover:bg-accent inline-flex h-9 w-9 items-center justify-center rounded-md transition-colors md:hidden"
+            aria-label="Toggle menu"
+          >
+            <Menu id="menu-icon" size={24} />
+            <X id="close-icon" class="hidden" size={24} />
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </nav>
+
+<div id="mobile-menu" class="bg-background fixed inset-0 top-16 z-40 hidden md:hidden">
+  <div class="container mx-auto flex flex-col gap-1 p-4">
+    <a
+      href="/#features"
+      class="hover:bg-accent text-foreground w-full rounded-lg px-4 py-3 text-left font-light transition-colors"
+    >
+      Features
+    </a>
+    <a
+      href="/#pricing"
+      class="hover:bg-accent text-foreground w-full rounded-lg px-4 py-3 text-left font-light transition-colors"
+    >
+      Pricing
+    </a>
+    <a
+      href="/blog"
+      class="hover:bg-accent text-foreground w-full rounded-lg px-4 py-3 text-left font-light transition-colors"
+    >
+      Blog
+    </a>
+    <div class="my-2 border-t"></div>
+    <a
+      href={links.app}
+      class="hover:bg-accent text-foreground w-full rounded-lg px-4 py-3 text-left font-light transition-colors"
+    >
+      Sign In
+    </a>
+  </div>
+</div>
+
+<script>
+  const nav = document.getElementById('site-nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 0) {
+      nav?.classList.remove('border-transparent');
+      nav?.classList.add('border-border');
+    } else {
+      nav?.classList.add('border-transparent');
+      nav?.classList.remove('border-border');
+    }
+  });
+
+  const toggle = document.getElementById('mobile-menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const menuIcon = document.getElementById('menu-icon');
+  const closeIcon = document.getElementById('close-icon');
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = !menu?.classList.contains('hidden');
+    menu?.classList.toggle('hidden', isOpen);
+    menuIcon?.classList.toggle('hidden', !isOpen);
+    closeIcon?.classList.toggle('hidden', isOpen);
+  });
+
+  menu?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      menu?.classList.add('hidden');
+      menuIcon?.classList.remove('hidden');
+      closeIcon?.classList.add('hidden');
+    });
+  });
+</script>

@@ -1,0 +1,121 @@
+---
+import { CloudDownload, Code, Globe, PenLine, Plug, Smartphone, Terminal, Workflow } from '@lucide/astro';
+
+const integrations = [
+  { name: 'API', icon: Code, color: 'text-emerald-600' },
+  { name: 'Webhooks', icon: Plug, color: 'text-blue-600' },
+  { name: 'CLI', icon: Terminal, color: 'text-violet-600' },
+  { name: 'Web', icon: Globe, color: 'text-amber-600' },
+  { name: 'Mobile', icon: Smartphone, color: 'text-rose-600' },
+];
+
+const fileTypes = [
+  { name: 'JSON', icon: Code, color: 'text-emerald-600' },
+  { name: 'CSV', icon: Workflow, color: 'text-red-600' },
+  { name: 'YAML', icon: Code, color: 'text-blue-600' },
+  { name: 'XML', icon: Code, color: 'text-violet-600' },
+  { name: 'Other', icon: Code, color: 'text-amber-600' },
+];
+
+const entryPoints = [
+  {
+    number: '01',
+    icon: CloudDownload,
+    iconColor: 'text-sky-600',
+    iconBg: 'bg-sky-500/10',
+    title: 'Native integrations',
+    description:
+      'Connect once and your data streams in automatically from the tools you already use. No glue code, no scheduled jobs.',
+    integrations,
+  },
+  {
+    number: '02',
+    icon: Workflow,
+    iconColor: 'text-violet-600',
+    iconBg: 'bg-violet-500/10',
+    title: 'File import',
+    description:
+      'Drop in a file and Acme parses every record, validates the shape, and stages everything for review before it lands in your account.',
+    fileTypes,
+  },
+  {
+    number: '03',
+    icon: PenLine,
+    iconColor: 'text-amber-600',
+    iconBg: 'bg-amber-500/10',
+    title: 'Manual entry',
+    description:
+      'For the one-offs that do not fit anywhere else. Add a record in a few clicks and Acme keeps it in sync with everything else.',
+  },
+];
+---
+
+<section class="px-5 py-16 sm:py-20">
+  <div class="mx-auto max-w-[60rem]">
+    <p class="text-primary mb-3 text-xs font-medium tracking-wider uppercase">Entry points</p>
+    <div class="mb-12 max-w-2xl sm:mb-14">
+      <h2 class="mb-4 text-3xl font-medium tracking-normal text-balance sm:text-4xl">
+        Your data, however it gets here.
+      </h2>
+      <p class="text-muted-foreground text-base leading-relaxed font-light">
+        Integrations handle most of it. Manual entry catches the rest. And when you have a big batch to dump in at once,
+        upload the file and let Acme parse it.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 gap-5 md:grid-cols-3">
+      {
+        entryPoints.map((entry) => (
+          <div class="entry-card relative flex flex-col rounded-2xl border p-6">
+            <span class="text-muted-foreground/60 absolute top-5 right-5 font-mono text-xs">{entry.number}</span>
+
+            <div class="mb-6 flex h-11 items-center">
+              {entry.integrations ? (
+                <div class="flex">
+                  {entry.integrations.map((item) => (
+                    <div
+                      title={item.name}
+                      class="bank-avatar ring-background -ml-2 flex h-9 w-9 items-center justify-center rounded-full bg-white ring-2 first:ml-0"
+                    >
+                      <item.icon size={20} stroke-width={1.5} class={item.color} />
+                    </div>
+                  ))}
+                </div>
+              ) : entry.fileTypes ? (
+                <div class="flex">
+                  {entry.fileTypes.map((file) => (
+                    <div
+                      title={file.name}
+                      class="bank-avatar ring-background -ml-2 flex h-9 w-9 items-center justify-center rounded-full bg-white ring-2 first:ml-0"
+                    >
+                      <file.icon size={20} stroke-width={1.5} class={file.color} />
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div class="bank-avatar ring-background flex h-9 w-9 items-center justify-center rounded-full bg-white ring-2">
+                  <entry.icon size={20} stroke-width={1.5} class={entry.iconColor} />
+                </div>
+              )}
+            </div>
+
+            <h3 class="mb-2 flex flex-wrap items-center gap-2 text-base font-semibold tracking-tight">
+              <span>{entry.title}</span>
+            </h3>
+            <p class="text-muted-foreground text-sm leading-relaxed font-light">{entry.description}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .entry-card {
+    border-color: color-mix(in srgb, var(--border) 60%, transparent);
+    background-color: color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+  .bank-avatar {
+    border: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
+  }
+</style>

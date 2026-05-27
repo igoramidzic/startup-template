@@ -1,0 +1,79 @@
+---
+const testimonials = [
+  {
+    quote:
+      'We replaced three internal tools with Acme and the team has not looked back. Clean UI, fast onboarding, and the support is genuinely best-in-class.',
+    author: 'Jamie V.',
+    role: 'Head of Operations',
+    initials: 'JV',
+  },
+  {
+    quote:
+      'After testing every option in the category, this is the only one we kept. Sleek design, intuitive interface, and a team that ships what we ask for.',
+    author: 'Morgan D.',
+    role: 'Engineering Manager',
+    initials: 'MD',
+  },
+  {
+    quote:
+      'For a fraction of the price of the incumbents, it offers pretty much the same functionality. The founders are friendly and prioritize feedback fast.',
+    author: 'Mike R.',
+    role: 'Startup Founder',
+    initials: 'MR',
+  },
+  {
+    quote:
+      'The app is incredibly snappy. Working through a long list goes really fast, where other tools make this slow and cumbersome. Same with the manual flows.',
+    author: 'Taylor T.',
+    role: 'Product Designer',
+    initials: 'TT',
+  },
+  {
+    quote:
+      'Super easy to set up. Reasonable defaults are created for me, so I do not have to manually configure every detail. The history view makes it easy to stay on top of changes.',
+    author: 'Reese N.',
+    role: 'Solo Founder',
+    initials: 'RN',
+  },
+];
+---
+
+<section class="px-5 py-16 sm:py-20">
+  <div class="mx-auto max-w-[60rem]">
+    <p class="text-primary mb-3 text-xs font-medium tracking-wider uppercase">Reviews</p>
+    <div class="mb-12 max-w-2xl sm:mb-14">
+      <h2 class="mb-4 text-3xl font-medium tracking-normal text-balance sm:text-4xl">What people are saying.</h2>
+      <p class="text-muted-foreground text-base leading-relaxed font-light">
+        Unedited reviews from teams who switched from their old stack, ditched their spreadsheets, or finally found
+        something that stuck.
+      </p>
+    </div>
+
+    <div class="columns-1 gap-6 md:columns-2 lg:columns-3">
+      {
+        testimonials.map((testimonial) => (
+          <div class="testimonial-card mb-6 break-inside-avoid rounded-xl border p-5">
+            <p class="text-foreground text-base leading-relaxed font-light">"{testimonial.quote}"</p>
+
+            <div class="mt-5 flex items-center gap-3">
+              <div class="bg-primary/10 flex h-9 w-9 shrink-0 items-center justify-center rounded-full">
+                <span class="text-primary text-xs font-medium">{testimonial.initials}</span>
+              </div>
+              <div class="flex flex-col">
+                <div class="text-sm font-medium">{testimonial.author}</div>
+                <div class="text-muted-foreground text-xs">{testimonial.role}</div>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonial-card {
+    border-color: color-mix(in srgb, var(--border) 60%, transparent);
+    background-color: color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+</style>

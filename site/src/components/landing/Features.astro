@@ -1,0 +1,90 @@
+---
+import { ChevronsRight, CloudDownload, Layers, ListChecks, Target, Zap } from '@lucide/astro';
+---
+
+<section class="bg-background">
+  <hr id="features" class="mx-auto max-w-[60rem] scroll-mt-16" />
+
+  <div class="feature-section">
+    <div class="mx-auto max-w-[60rem]">
+      <p class="text-primary mb-3 text-xs font-medium tracking-wider uppercase">Core features</p>
+      <div class="mb-12 max-w-2xl sm:mb-14">
+        <h2 class="mb-4 text-3xl font-medium tracking-normal text-balance sm:text-4xl">
+          A one-line summary of what your product does.
+        </h2>
+        <p class="text-muted-foreground text-base leading-relaxed font-light">
+          A two-sentence pitch that expands on the headline above. Explain the problem you solve and the way you solve
+          it differently from the alternatives.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 gap-x-10 gap-y-10 sm:grid-cols-2 md:grid-cols-3">
+        <div>
+          <div class="bg-primary/10 mb-3 inline-flex h-10 w-10 items-center justify-center rounded-lg">
+            <Layers size={20} stroke-width={1.5} class="text-primary" />
+          </div>
+          <h3 class="mb-2 text-base font-semibold tracking-tight">Feature one</h3>
+          <p class="text-muted-foreground text-sm leading-relaxed font-light">
+            Describe the first headline feature. Two short sentences that explain the benefit, not the mechanics.
+          </p>
+        </div>
+        <div>
+          <div class="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-red-500/10">
+            <Target size={20} stroke-width={1.5} class="text-red-600" />
+          </div>
+          <h3 class="mb-2 text-base font-semibold tracking-tight">Feature two</h3>
+          <p class="text-muted-foreground text-sm leading-relaxed font-light">
+            Describe the second feature. Keep the tone consistent and the value statement specific.
+          </p>
+        </div>
+        <div>
+          <div class="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-amber-500/10">
+            <Zap size={20} stroke-width={1.5} class="text-amber-600" />
+          </div>
+          <h3 class="mb-2 text-base font-semibold tracking-tight">Feature three</h3>
+          <p class="text-muted-foreground text-sm leading-relaxed font-light">
+            Describe the third feature. Show what is automated, removed, or made easier for the customer.
+          </p>
+        </div>
+        <div>
+          <div class="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-sky-500/10">
+            <CloudDownload size={20} stroke-width={1.5} class="text-sky-600" />
+          </div>
+          <h3 class="mb-2 text-base font-semibold tracking-tight">Feature four</h3>
+          <p class="text-muted-foreground text-sm leading-relaxed font-light">
+            Describe a connectivity or integration feature. Mention the breadth of what you connect to.
+          </p>
+        </div>
+        <div>
+          <div class="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-orange-400/10">
+            <ChevronsRight size={20} stroke-width={1.5} class="text-orange-600" />
+          </div>
+          <h3 class="mb-2 text-base font-semibold tracking-tight">Feature five</h3>
+          <p class="text-muted-foreground text-sm leading-relaxed font-light">
+            Describe an intelligence or automation feature. Convey the time it saves with one concrete example.
+          </p>
+        </div>
+        <div>
+          <div class="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600/10">
+            <ListChecks size={20} stroke-width={1.5} class="text-indigo-600" />
+          </div>
+          <h3 class="mb-2 text-base font-semibold tracking-tight">Feature six</h3>
+          <p class="text-muted-foreground text-sm leading-relaxed font-light">
+            Describe a customization feature. Show that the product adapts to the user, not the other way around.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .feature-section {
+    padding: 4rem 1.25rem;
+  }
+  @media (min-width: 640px) {
+    .feature-section {
+      padding: 5rem 1.25rem;
+    }
+  }
+</style>
