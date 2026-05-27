@@ -1,0 +1,160 @@
+---
+interface Props {
+  slug: string;
+  title: string;
+  pubDate: Date;
+}
+
+const { slug, title, pubDate } = Astro.props;
+
+const postUrl = `https://example.com/blog/${slug}`;
+const prompt = `Read and summarize this blog post, highlighting the main points and important insights: ${postUrl}`;
+const encodedPrompt = encodeURIComponent(prompt);
+
+const formattedDate = pubDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  timeZone: 'UTC',
+});
+
+const aiLinks = [
+  {
+    name: 'ChatGPT',
+    url: `https://chatgpt.com/?q=${encodedPrompt}`,
+    icon: '/images/ai/chatgpt.svg',
+  },
+  {
+    name: 'Claude',
+    url: `https://claude.ai/new?q=${encodedPrompt}`,
+    icon: '/images/ai/claude.svg',
+  },
+  {
+    name: 'Gemini',
+    url: `https://gemini.google.com/app?q=${encodedPrompt}`,
+    icon: '/images/ai/gemini.svg',
+  },
+];
+---
+
+<div class="flex flex-wrap items-center gap-2">
+  <!-- Published date -->
+  <span class="bg-secondary text-secondary-foreground rounded-full px-3 py-1.5 text-xs">
+    Published {formattedDate}
+  </span>
+
+  <!-- Copy link -->
+  <button
+    type="button"
+    data-copy-url={postUrl}
+    class="bg-secondary text-secondary-foreground hover:bg-accent hover:text-accent-foreground flex cursor-pointer items-center gap-1.5 rounded-full px-3 py-1.5 text-xs transition-colors"
+  >
+    <svg
+      data-copy-icon
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="h-3.5 w-3.5"
+    >
+      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+    </svg>
+    <svg
+      data-check-icon
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="#22c55e"
+      stroke-width="2.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="hidden h-3.5 w-3.5"
+    >
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+    <span data-copy-label>Copy</span>
+  </button>
+
+  <!-- Share -->
+  <button
+    type="button"
+    data-share-url={postUrl}
+    data-share-title={title}
+    class="bg-secondary text-secondary-foreground hover:bg-accent hover:text-accent-foreground flex cursor-pointer items-center gap-1.5 rounded-full px-3 py-1.5 text-xs transition-colors"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="h-3.5 w-3.5"
+    >
+      <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+      <polyline points="16 6 12 2 8 6"></polyline>
+      <line x1="12" y1="2" x2="12" y2="15"></line>
+    </svg>
+    Share
+  </button>
+
+  <!-- Summarize with AI -->
+  <div class="bg-secondary flex items-center gap-1.5 rounded-full px-3 py-1.5">
+    <span class="summarize-label text-xs font-medium">Summarize with</span>
+    {
+      aiLinks.map((ai) => (
+        <a
+          href={ai.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          title={ai.name}
+          class="opacity-60 transition-opacity hover:opacity-100"
+        >
+          <img src={ai.icon} alt={ai.name} class="h-4 w-4" />
+        </a>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .summarize-label {
+    background: linear-gradient(135deg, #f97316, #ec4899, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-copy-url]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const url = btn.dataset.copyUrl;
+      if (!url) return;
+      await navigator.clipboard.writeText(url);
+      const label = btn.querySelector('[data-copy-label]');
+      const copyIcon = btn.querySelector('[data-copy-icon]');
+      const checkIcon = btn.querySelector('[data-check-icon]');
+      if (label) label.textContent = 'Copied!';
+      copyIcon?.classList.add('hidden');
+      checkIcon?.classList.remove('hidden');
+      setTimeout(() => {
+        if (label) label.textContent = 'Copy';
+        copyIcon?.classList.remove('hidden');
+        checkIcon?.classList.add('hidden');
+      }, 2000);
+    });
+  });
+
+  document.querySelectorAll<HTMLButtonElement>('[data-share-url]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const copyBtn = document.querySelector<HTMLButtonElement>('[data-copy-url]');
+      copyBtn?.click();
+    });
+  });
+</script>

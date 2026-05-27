@@ -1,0 +1,127 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import BaseLayout from './BaseLayout.astro';
+import TableOfContents from '../components/TableOfContents.astro';
+import BlogPostActions from '../components/BlogPostActions.astro';
+
+interface PostLink {
+  id: string;
+  title: string;
+  description: string;
+  heroImage?: ImageMetadata;
+}
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+  headings: Array<{ depth: number; slug: string; text: string }>;
+  prevPost?: PostLink | null;
+  nextPost?: PostLink | null;
+}
+
+const { post, headings, prevPost, nextPost } = Astro.props;
+const { title, description, pubDate, heroImage } = post.data;
+---
+
+<BaseLayout title={title} description={description} image={heroImage?.src} type="article" publishedDate={pubDate}>
+  <div class="px-5 py-12">
+    <div class="mx-auto max-w-4xl">
+      <header class="mb-8">
+        <div class="mx-auto max-w-xl">
+          <a
+            href="/blog"
+            class="text-muted-foreground hover:text-foreground mb-6 inline-flex items-center gap-1 text-xs transition-colors"
+          >
+            &larr; Blog
+          </a>
+
+          <div class="bg-secondary mb-6 flex w-fit items-center gap-2 rounded-full py-1 pr-3 pl-1">
+            <img src="/images/igor-amidzic.jpg" alt="Igor Amidzic" class="h-6 w-6 rounded-full object-cover" />
+            <div class="flex flex-col">
+              <span class="text-foreground text-xs leading-tight font-medium">Igor Amidzic</span>
+              <span class="text-muted-foreground text-[10px] leading-tight">Founder</span>
+            </div>
+          </div>
+          <h1 class="mb-4 text-3xl leading-tight font-semibold tracking-tight sm:text-4xl">
+            {title}
+          </h1>
+
+          <p class="text-muted-foreground text-base font-light">
+            {description}
+          </p>
+
+          <div class="mt-4">
+            <BlogPostActions slug={post.id} title={title} pubDate={pubDate} />
+          </div>
+        </div>
+
+        {heroImage && <Image src={heroImage} alt={title} class="mt-8 w-full rounded-lg object-cover" />}
+      </header>
+
+      <div class="lg:grid lg:grid-cols-[1fr_220px] lg:gap-12">
+        <div class="prose min-w-0">
+          <slot />
+        </div>
+
+        <TableOfContents headings={headings} />
+      </div>
+
+      <nav class="mt-12 border-t pt-8">
+        <a
+          href="/blog"
+          class="text-muted-foreground hover:text-foreground mb-8 inline-flex items-center gap-2 text-sm font-medium transition-colors"
+        >
+          &larr; All posts
+        </a>
+
+        {
+          (prevPost || nextPost) && (
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+              {prevPost ? (
+                <a href={`/blog/${prevPost.id}`} class="group block">
+                  {prevPost.heroImage && (
+                    <Image
+                      src={prevPost.heroImage}
+                      alt={prevPost.title}
+                      class="mb-3 aspect-video w-full rounded-lg object-cover grayscale transition-[filter] duration-300 group-hover:grayscale-0"
+                      loading="lazy"
+                    />
+                  )}
+                  <p class="text-muted-foreground mb-1 text-xs font-medium tracking-wide uppercase">Previous</p>
+                  <p class="text-foreground text-sm font-bold transition-opacity duration-300 group-hover:opacity-70">
+                    {prevPost.title}
+                  </p>
+                  <p class="text-muted-foreground mt-1 line-clamp-2 text-xs leading-relaxed font-light">
+                    {prevPost.description}
+                  </p>
+                </a>
+              ) : (
+                <div />
+              )}
+              {nextPost && (
+                <a href={`/blog/${nextPost.id}`} class="group block">
+                  {nextPost.heroImage && (
+                    <Image
+                      src={nextPost.heroImage}
+                      alt={nextPost.title}
+                      class="mb-3 aspect-video w-full rounded-lg object-cover grayscale transition-[filter] duration-300 group-hover:grayscale-0"
+                      loading="lazy"
+                    />
+                  )}
+                  <p class="text-muted-foreground mb-1 text-xs font-medium tracking-wide uppercase">Next</p>
+                  <p class="text-foreground text-sm font-bold transition-opacity duration-300 group-hover:opacity-70">
+                    {nextPost.title}
+                  </p>
+                  <p class="text-muted-foreground mt-1 line-clamp-2 text-xs leading-relaxed font-light">
+                    {nextPost.description}
+                  </p>
+                </a>
+              )}
+            </div>
+          )
+        }
+      </nav>
+    </div>
+  </div>
+</BaseLayout>

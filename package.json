@@ -1,0 +1,35 @@
+{
+  "name": "startup-template",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently -n web,convex -c blue,green --kill-others-on-fail \"pnpm dev:web\" \"pnpm dev:convex\"",
+    "dev:web": "pnpm --filter web dev",
+    "dev:convex": "convex dev",
+    "dev:site": "pnpm --filter site dev",
+    "dev:docs": "cd docs && mintlify dev",
+    "dev:all": "concurrently -n web,convex,site,docs -c blue,green,magenta,yellow --kill-others-on-fail \"pnpm dev:web\" \"pnpm dev:convex\" \"pnpm dev:site\" \"pnpm dev:docs\"",
+    "build": "pnpm --filter web build",
+    "build:web": "pnpm --filter web build",
+    "build:site": "pnpm --filter site build",
+    "preview": "pnpm --filter web preview",
+    "preview:web": "pnpm --filter web preview",
+    "preview:site": "pnpm --filter site preview",
+    "lint": "pnpm --filter web lint",
+    "format:check": "prettier --check \"web/src/**/*.{ts,tsx,css,json}\" \"convex/**/*.{ts,js,json}\" \"site/src/**/*.{ts,astro,md,mdx,css,json}\" \"docs/**/*.{mdx,json}\"",
+    "format": "prettier --write --ignore-unknown \"web/src/**/*.{ts,tsx,css,json}\" \"convex/**/*.{ts,js,json}\" \"site/src/**/*.{ts,astro,md,mdx,css,json}\" \"docs/**/*.{mdx,json}\""
+  },
+  "dependencies": {
+    "convex": "^1.39.1",
+    "svix": "^1.94.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.1",
+    "concurrently": "^9.2.1",
+    "mintlify": "^4.2.579",
+    "prettier": "^3.8.3",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-organize-imports": "^4.3.0",
+    "prettier-plugin-tailwindcss": "^0.8.0"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "appearance": {
+    "default": "system",
+    "strict": false
+  },
+  "name": "Docs",
+  "colors": {
+    "primary": "#6e7ae5",
+    "light": "#8b95ef",
+    "dark": "#5a65d4"
+  },
+  "favicon": "/favicon.ico",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": ["introduction", "quickstart"]
+          }
+        ]
+      }
+    ]
+  },
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Support",
+        "href": "mailto:hello@example.com"
+      }
+    ]
+  },
+  "icons": {
+    "library": "lucide"
+  }
+}
