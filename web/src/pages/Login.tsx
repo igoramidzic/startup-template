@@ -273,7 +273,7 @@ export default function Login() {
               </Alert>
             )}
 
-            <form onSubmit={handleSubmitEmail} className="flex w-full flex-col gap-4">
+            <form onSubmit={handleSubmitEmail} className="flex w-full flex-col gap-4" noValidate>
               <Input
                 id="email"
                 type="email"
