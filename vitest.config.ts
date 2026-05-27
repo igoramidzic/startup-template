@@ -22,6 +22,18 @@ export default defineConfig({
         },
       },
       {
+        resolve: {
+          alias: [
+            {
+              find: /.*\/_generated\/api$/,
+              replacement: path.resolve(__dirname, 'convex/__mocks__/_generated/api.ts'),
+            },
+            {
+              find: /.*\/_generated\/server$/,
+              replacement: path.resolve(__dirname, 'convex/__mocks__/_generated/server.ts'),
+            },
+          ],
+        },
         test: {
           name: 'convex',
           globals: true,

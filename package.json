@@ -19,8 +19,7 @@
     "test": "vitest",
     "test:ci": "vitest run",
     "format:check": "prettier --check \"web/src/**/*.{ts,tsx,css,json}\" \"convex/**/*.{ts,js,json}\" \"site/src/**/*.{ts,astro,md,mdx,css,json}\" \"docs/**/*.{mdx,json}\"",
-    "format": "prettier --write --ignore-unknown \"web/src/**/*.{ts,tsx,css,json}\" \"convex/**/*.{ts,js,json}\" \"site/src/**/*.{ts,astro,md,mdx,css,json}\" \"docs/**/*.{mdx,json}\"",
-    "test:ci": "echo 'No tests configured yet'"
+    "format": "prettier --write --ignore-unknown \"web/src/**/*.{ts,tsx,css,json}\" \"convex/**/*.{ts,js,json}\" \"site/src/**/*.{ts,astro,md,mdx,css,json}\" \"docs/**/*.{mdx,json}\""
   },
   "dependencies": {
     "convex": "^1.39.1",
