@@ -17,7 +17,8 @@
     "preview:site": "pnpm --filter site preview",
     "lint": "pnpm --filter web lint",
     "format:check": "prettier --check \"web/src/**/*.{ts,tsx,css,json}\" \"convex/**/*.{ts,js,json}\" \"site/src/**/*.{ts,astro,md,mdx,css,json}\" \"docs/**/*.{mdx,json}\"",
-    "format": "prettier --write --ignore-unknown \"web/src/**/*.{ts,tsx,css,json}\" \"convex/**/*.{ts,js,json}\" \"site/src/**/*.{ts,astro,md,mdx,css,json}\" \"docs/**/*.{mdx,json}\""
+    "format": "prettier --write --ignore-unknown \"web/src/**/*.{ts,tsx,css,json}\" \"convex/**/*.{ts,js,json}\" \"site/src/**/*.{ts,astro,md,mdx,css,json}\" \"docs/**/*.{mdx,json}\"",
+    "test:ci": "echo 'No tests configured yet'"
   },
   "dependencies": {
     "convex": "^1.39.1",
